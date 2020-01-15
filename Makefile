@@ -2,7 +2,7 @@ CXX = g++
 CFLAGS = -g -Wall -Wextra -std=c++17 -O0
 OBJ = 
 LINK = 
-EXE = cnn
+EXE = brainyboi
 
 obj/%.o: src/%.cpp $(HDR)
 	$(CXX) $(CFLAGS) $< -c -o $@
