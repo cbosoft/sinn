@@ -2,7 +2,7 @@ CXX = g++
 CFLAGS = -g -Wall -Wextra -std=c++17 -O0
 OBJ = 
 LINK = 
-EXE = brainyboi
+EXE = sinn
 
 obj/%.o: src/%.cpp $(HDR)
 	mkdir -p `dirname $@`
