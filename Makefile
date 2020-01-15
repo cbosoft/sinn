@@ -5,6 +5,7 @@ LINK =
 EXE = brainyboi
 
 obj/%.o: src/%.cpp $(HDR)
+	mkdir -p `dirname $@`
 	$(CXX) $(CFLAGS) $< -c -o $@
 
 exe: obj/main.o $(OBJ) $(HDR)
