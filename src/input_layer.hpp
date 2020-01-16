@@ -12,4 +12,5 @@ class InputLayer : public virtual Layer {
     ~InputLayer() =default;
 
     void generate_neurons(std::vector<double> input_values);
+    void set_values(std::vector<double> input_values);
 };
