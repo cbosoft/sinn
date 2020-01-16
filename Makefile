@@ -1,6 +1,15 @@
 CXX = g++
 CFLAGS = -g -Wall -Wextra -std=c++17 -O0
-OBJ = 
+OBJ = \
+			obj/neural_network.o \
+			obj/input_layer.o \
+			obj/hidden_layer.o \
+			obj/output_layer.o \
+			obj/layer.o \
+			obj/input_neuron.o \
+			obj/hidden_neuron.o \
+			obj/activation_function.o
+
 LINK = 
 EXE = sinn
 
