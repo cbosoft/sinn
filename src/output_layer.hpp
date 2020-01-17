@@ -3,7 +3,7 @@
 #include "hidden_layer.hpp"
 
 
-class OutputLayer : public virtual HiddenLayer {
+class OutputLayer : public HiddenLayer {
 
   public:
 

@@ -3,7 +3,7 @@
 #include "hidden_neuron.hpp"
 #include "layer.hpp"
 
-class HiddenLayer : public virtual Layer {
+class HiddenLayer : public Layer {
 
   public:
 
