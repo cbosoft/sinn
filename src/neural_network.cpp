@@ -4,6 +4,12 @@
 #include "hidden_neuron.hpp"
 #include "neural_network.hpp"
 
+NeuralNetwork::NeuralNetwork()
+{
+  this->last_error = 100.0;
+}
+
+
 void NeuralNetwork::add_layer(Layer *layer)
 {
   this->layers.push_back(layer);
@@ -98,4 +104,9 @@ void NeuralNetwork::as_dot()
 
   std::cout << "}" << std::endl;
 
+}
+
+double NeuralNetwork::get_last_error()
+{
+  return this->last_error;
 }

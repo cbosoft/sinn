@@ -40,6 +40,8 @@ void NeuralNetwork::train(std::vector<std::vector<double>> training_inputs, std:
       ((HiddenNeuron *)_neuron)->swap_weights();
 
   }
+
+  std::cerr << this->last_error << std::endl;
 }
 
 void NeuralNetwork::set_input(std::vector<double> input)
@@ -82,6 +84,6 @@ double NeuralNetwork::get_error(std::vector<std::vector<double>> training_inputs
     total_error = sumsqdiff(value, output);
   }
 
-  std::cerr << total_error << std::endl;
+  this->last_error = total_error;
   return total_error;
 }

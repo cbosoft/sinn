@@ -7,10 +7,11 @@ class NeuralNetwork {
   private:
 
     std::vector<Layer *> layers;
+    double last_error;
 
   public:
 
-    NeuralNetwork() { }
+    NeuralNetwork();
 
     void add_layer(Layer *layer);
     void print();
@@ -19,5 +20,6 @@ class NeuralNetwork {
     double get_error(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs);
     void set_input(std::vector<double> input);
     void as_dot();
+    double get_last_error();
 
 };
