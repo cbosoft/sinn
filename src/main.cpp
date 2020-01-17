@@ -7,12 +7,7 @@ int main(void)
 {
   NeuralNetwork nn = NeuralNetwork();
   nn.add_layer(new InputLayer({0.1, 0.2, 0.3}));
-  nn.add_layer(new HiddenLayer(4));
-  nn.add_layer(new HiddenLayer(3));
   nn.add_layer(new OutputLayer(2));
-
-  nn.print();
-
   std::vector<std::vector<double>> training_inputs = {
     {0.1, 0.1, 0.1},
     {0.2, 0.2, 0.2},
@@ -26,8 +21,13 @@ int main(void)
     {1.2, 1.2}
   };
 
-  for (int i = 0; i < 10000; i++)
-    nn.train(training_inputs, training_outputs, 0.1);
+  nn.set_input(training_inputs[0]);
+  nn.print();
 
+  for (int i = 0; i < 10000 && nn.get_last_error() > 0.0; i++) {
+    nn.train(training_inputs, training_outputs, 0.01);
+  }
+
+  nn.set_input(training_inputs[0]);
   nn.print();
 }
