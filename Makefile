@@ -8,7 +8,8 @@ OBJ = \
 			obj/layer.o \
 			obj/input_neuron.o \
 			obj/hidden_neuron.o \
-			obj/activation_function.o
+			obj/activation_functions/identity.o \
+			obj/activation_functions/lrelu.o
 
 LINK = 
 EXE = sinn
@@ -16,7 +17,7 @@ EXE = sinn
 obj/%.o: src/%.cpp $(HDR)
 	mkdir -p `dirname $@`
 	$(CXX) $(CFLAGS) $< -c -o $@
-
+	
 exe: obj/main.o $(OBJ) $(HDR)
 	$(CXX) $(CFLAGS) obj/main.o $(OBJ) -o $(EXE) $(LINK)
 

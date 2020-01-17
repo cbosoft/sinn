@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-HiddenNeuron::HiddenNeuron()
+HiddenNeuron::HiddenNeuron(ActivationFunction *actfunc)
 {
-  this->activation_function = &actfunc_identity;
+  this->activation_function = actfunc;
 }
 
 double HiddenNeuron::get_value()
@@ -16,7 +16,7 @@ double HiddenNeuron::get_value()
     double weight = this->weights[i];
     total += neuron->get_value()*weight;
   }
-  return this->activation_function(total, this->activation_func_args);
+  return this->activation_function->calculate_value(total);
 };
 
 
@@ -27,7 +27,7 @@ void HiddenNeuron::add_weighted_input(Neuron *neuron, double weight)
 }
 
 
-void HiddenNeuron::set_activation_function(ActivationFunction activation_function)
+void HiddenNeuron::set_activation_function(ActivationFunction *activation_function)
 {
   this->activation_function = activation_function;
 }
