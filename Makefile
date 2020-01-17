@@ -6,6 +6,7 @@ OBJ = \
 			obj/hidden_layer.o \
 			obj/output_layer.o \
 			obj/layer.o \
+			obj/train.o \
 			obj/input_neuron.o \
 			obj/hidden_neuron.o \
 			obj/activation_functions/identity.o \
