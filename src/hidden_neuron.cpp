@@ -24,10 +24,19 @@ void HiddenNeuron::add_weighted_input(Neuron *neuron, double weight)
 {
   this->in.push_back(neuron);
   this->weights.push_back(weight);
+  this->next_weights.push_back(weight);
 }
 
 
 void HiddenNeuron::set_activation_function(ActivationFunction *activation_function)
 {
   this->activation_function = activation_function;
+}
+
+
+void HiddenNeuron::swap_weights()
+{
+  auto temp = this->weights;
+  this->weights = this->next_weights;
+  this->next_weights = this->weights;
 }
