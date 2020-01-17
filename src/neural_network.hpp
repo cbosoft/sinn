@@ -16,5 +16,6 @@ class NeuralNetwork {
     void print();
     std::vector<double> run(std::vector<double> input);
     void train(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs);
+    void as_dot();
 
 };
