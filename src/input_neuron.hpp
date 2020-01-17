@@ -3,7 +3,7 @@
 #include "neuron.hpp"
 
 
-class InputNeuron : public virtual Neuron {
+class InputNeuron : public Neuron {
 
   private:
 
@@ -15,5 +15,6 @@ class InputNeuron : public virtual Neuron {
     ~InputNeuron() =default;
 
     double get_value() override;
+    void set_value(double value);
 
 };
