@@ -1,6 +1,8 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <fstream>
+
 #include "hidden_neuron.hpp"
 #include "neural_network.hpp"
 
@@ -63,46 +65,46 @@ void NeuralNetwork::print()
 }
 
 
-void NeuralNetwork::as_dot()
+void NeuralNetwork::as_dot(std::string filename)
 {
-
-  std::cout << "digraph G {" << std::endl
-            << "  rankdir=LR;" << std::endl
-            << "  ordering=out;" << std::endl
-            << "  fontname=\"CMU Sans Serif\";" << std::endl
-            << "  node [fontname=\"CMU Sans Serif\"];" << std::endl
-            << "  edge [fontname=\"CMU Sans Serif\"];" << std::endl
-            << "  ranksep=\"1.0 equally\";" << std::endl;
+  std::fstream of(filename, std::ios::trunc);
+  of << "digraph G {" << std::endl
+     << "  rankdir=LR;" << std::endl
+     << "  ordering=out;" << std::endl
+     << "  fontname=\"CMU Sans Serif\";" << std::endl
+     << "  node [fontname=\"CMU Sans Serif\"];" << std::endl
+     << "  edge [fontname=\"CMU Sans Serif\"];" << std::endl
+     << "  ranksep=\"1.0 equally\";" << std::endl;
   
   for (size_t layer_index = 0; layer_index < this->layers.size(); layer_index++) {
-    std::cout << "  subgraph cluster_" << layer_index << "{" << std::endl;
+    of << "  subgraph cluster_" << layer_index << "{" << std::endl;
     for (size_t neuron_index = 0; neuron_index < this->layers[layer_index]->neurons.size(); neuron_index++) {
-      std::cout << "    layer_" << layer_index << "_" << neuron_index << " [label=\"" << this->layers[layer_index]->neurons[neuron_index]->get_value() << "\"];" << std::endl;
+      of << "    layer_" << layer_index << "_" << neuron_index << " [label=\"" << this->layers[layer_index]->neurons[neuron_index]->get_value() << "\"];" << std::endl;
     }
 
-    std::cout << "    label=\"";
+    of << "    label=\"";
     if (layer_index == 0) {
-      std::cout << "Input Layer";
+      of << "Input Layer";
     }
     else if (layer_index == (this->layers.size() - 1)) {
-      std::cout << "Output Layer";
+      of << "Output Layer";
     }
     else {
-      std::cout << "Hidden Layer " << layer_index;
+      of << "Hidden Layer " << layer_index;
     }
-    std::cout << "\";" << std::endl;
-    std::cout << "  }" << std::endl;
+    of << "\";" << std::endl;
+    of << "  }" << std::endl;
   }
 
   for (size_t layer_index = 1; layer_index < this->layers.size(); layer_index++) {
     for (size_t pn_index = 0; pn_index < this->layers[layer_index-1]->neurons.size(); pn_index++) {
       for (size_t n_index = 0; n_index < this->layers[layer_index]->neurons.size(); n_index++) {
-        std::cout << "  layer_" << layer_index-1 << "_" << pn_index << " -> layer_" << layer_index << "_" << n_index << ";" << std::endl;
+        of << "  layer_" << layer_index-1 << "_" << pn_index << " -> layer_" << layer_index << "_" << n_index << ";" << std::endl;
       }
     }
   }
 
-  std::cout << "}" << std::endl;
+  of << "}" << std::endl;
 
 }
 

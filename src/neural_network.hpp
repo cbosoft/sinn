@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include "layer.hpp"
 
 class NeuralNetwork {
@@ -19,7 +20,7 @@ class NeuralNetwork {
     void train(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs, double learning_rate);
     double get_error(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs);
     void set_input(std::vector<double> input);
-    void as_dot();
+    void as_dot(std::string filename);
     double get_last_error();
 
 };
