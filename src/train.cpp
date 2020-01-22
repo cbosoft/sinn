@@ -3,6 +3,7 @@
 #include "neural_network.hpp"
 #include "hidden_neuron.hpp"
 #include "output_layer.hpp"
+#include "util.hpp"
 
 void NeuralNetwork::train(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs, double learning_rate, double dWeight)
 {
@@ -21,10 +22,14 @@ void NeuralNetwork::train(std::vector<std::vector<double>> training_inputs, std:
       HiddenNeuron *neuron = ((HiddenNeuron *)_neuron);
 
       for (size_t weight_index = 0; weight_index < neuron->weights.size(); weight_index++) {
+
+        double weight_before = neuron->weights[weight_index];
         neuron->weights[weight_index] += dWeight;
         double dError = this->get_error(training_inputs, training_outputs) - initial_error;
-        neuron->weights[weight_index] -= dWeight;
-        neuron->next_weights[weight_index] = neuron->weights[weight_index] - (learning_rate * (dWeight/dError));
+        neuron->weights[weight_index] = weight_before; // done in this way to prevent possible floating point errors introduced by adding and subtracting
+
+        neuron->set_substitute(weight_index, neuron->weights[weight_index] - (learning_rate * (dWeight/dError)));
+
       }
 
     }
