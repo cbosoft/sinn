@@ -51,22 +51,6 @@ void NeuralNetwork::set_input(std::vector<double> input)
   }
 }
 
-double sumsqdiff(std::vector<double> a, std::vector<double> b)
-{
-  if (a.size() != b.size()) {
-    std::cerr << "sumsqdiff: vectors must match size." << std::endl;
-  }
-
-
-  double rv = 0.0;
-  for (size_t i = 0; i < a.size(); i++) {
-    double diff = a[i] - b[i];
-    rv += diff*diff;
-  }
-
-  return rv;
-}
-
 double NeuralNetwork::get_error(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs)
 {
   double total_error = 0.0;

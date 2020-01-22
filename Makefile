@@ -10,7 +10,8 @@ OBJ = \
 			obj/input_neuron.o \
 			obj/hidden_neuron.o \
 			obj/activation_functions/identity.o \
-			obj/activation_functions/lrelu.o
+			obj/activation_functions/lrelu.o \
+			obj/util.o
 
 LINK = 
 EXE = sinn
