@@ -17,7 +17,7 @@ class NeuralNetwork {
     void add_layer(Layer *layer);
     void print();
     std::vector<double> run(std::vector<double> input);
-    void train(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs, double learning_rate);
+    void train(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs, double learning_rate, double dWeight=1e-5);
     double get_error(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs);
     void set_input(std::vector<double> input);
     void as_dot(std::string filename);

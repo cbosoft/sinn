@@ -4,7 +4,7 @@
 #include "hidden_neuron.hpp"
 #include "output_layer.hpp"
 
-void NeuralNetwork::train(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs, double learning_rate)
+void NeuralNetwork::train(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs, double learning_rate, double dWeight)
 {
   /*
     For each neuron:
@@ -20,7 +20,6 @@ void NeuralNetwork::train(std::vector<std::vector<double>> training_inputs, std:
     for (auto _neuron : layer->neurons) {
       HiddenNeuron *neuron = ((HiddenNeuron *)_neuron);
 
-      double dWeight = 1e-2;
       for (size_t weight_index = 0; weight_index < neuron->weights.size(); weight_index++) {
         neuron->weights[weight_index] += dWeight;
         double dError = this->get_error(training_inputs, training_outputs) - initial_error;
