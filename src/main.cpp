@@ -11,16 +11,16 @@ int main(void)
   nn.add_layer(new InputLayer({0.1, 0.2, 0.3}));
   nn.add_layer(new OutputLayer(2));
   std::vector<std::vector<double>> training_inputs = {
-    {0.1, 0.1, 0.1},
-    {0.2, 0.2, 0.2},
-    {0.3, 0.3, 0.3},
-    {0.4, 0.4, 0.4}
+    {1, 1, 1},
+    {2, 2, 2},
+    {3, 3, 3},
+    {4, 4, 4}
   };
   std::vector<std::vector<double>> training_outputs = {
-    {0.3, 0.3},
-    {0.6, 0.6},
-    {0.9, 0.9},
-    {1.2, 1.2}
+    {3, 3},
+    {6, 6},
+    {9, 9},
+    {12, 12}
   };
 
   nn.set_input(training_inputs[0]);
