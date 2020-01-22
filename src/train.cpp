@@ -2,7 +2,6 @@
 
 #include "neural_network.hpp"
 #include "hidden_neuron.hpp"
-#include "input_neuron.hpp"
 #include "output_layer.hpp"
 
 void NeuralNetwork::train(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs, double learning_rate)
@@ -42,13 +41,6 @@ void NeuralNetwork::train(std::vector<std::vector<double>> training_inputs, std:
   }
 
   std::cerr << this->last_error << std::endl;
-}
-
-void NeuralNetwork::set_input(std::vector<double> input)
-{
-  for (size_t i = 0; i < input.size(); i++) {
-    ((InputNeuron *)this->layers[0]->neurons[i])->set_value(input[i]);
-  }
 }
 
 double NeuralNetwork::get_error(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs)
