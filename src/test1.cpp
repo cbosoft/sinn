@@ -1,20 +1,8 @@
 #include <iostream>
-#include <sstream>
 
 #include "sinn.hpp"
+#include "util.hpp"
 #include "test.hpp"
-
-std::string vec2string(std::vector<double> vec)
-{
-  std::stringstream ss;
-  ss << "[";
-  for (auto v : vec) {
-    ss << " " << v;
-  }
-  ss << " ]";
-  std::string rv = ss.str();
-  return rv;
-}
 
 int main(void)
 {

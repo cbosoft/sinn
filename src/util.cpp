@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include "util.hpp"
 #include "exception.hpp"
 
@@ -13,5 +15,19 @@ double sumsqdiff(std::vector<double> a, std::vector<double> b)
     rv += diff*diff;
   }
 
+  return rv;
+}
+
+
+
+std::string vec2string(std::vector<double> vec)
+{
+  std::stringstream ss;
+  ss << "[";
+  for (auto v : vec) {
+    ss << " " << v;
+  }
+  ss << " ]";
+  std::string rv = ss.str();
   return rv;
 }
