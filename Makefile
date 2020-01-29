@@ -18,12 +18,6 @@ OBJ = \
 LINK = 
 EXE = sinn
 
-tests: test1
-	cd tests && ./run_tests.sh
-
-test1: obj/test1.o $(OBJ) $(HDR)
-	$(CXX) $(CFLAGS) $< $(OBJ) -o tests/$@ $(LINK)
-
 obj/%.o: src/%.cpp $(HDR)
 	mkdir -p `dirname $@`
 	$(CXX) $(CFLAGS) $< -c -o $@
@@ -33,6 +27,16 @@ exe: obj/main.o $(OBJ) $(HDR)
 
 build-and-run: exe
 	./$(EXE)
+
+tests: test1 test2
+	cd tests && ./run_tests.sh
+
+test1: obj/test1.o $(OBJ) $(HDR)
+	$(CXX) $(CFLAGS) $< $(OBJ) -o tests/$@ $(LINK)
+
+test2: obj/test2.o $(OBJ) $(HDR)
+	$(CXX) $(CFLAGS) $< $(OBJ) -o tests/$@ $(LINK)
+
 
 clean:
 	rm -rf obj $(EXE)
