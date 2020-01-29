@@ -50,19 +50,17 @@ void NeuralNetwork::train(std::vector<std::vector<double>> training_inputs, std:
 
 double NeuralNetwork::get_error(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs)
 {
-  double total_error = 0.0;
 
   if (training_inputs.size() != training_outputs.size()) {
     std::cerr << "net::get_error: training dataset inputs must match size of outputs." << std::endl;
   }
 
+  double total_error = 0.0;
   for (size_t set_index = 0; set_index < training_inputs.size(); set_index++) {
     auto input = training_inputs[set_index];
     auto output = training_outputs[set_index];
-    this->set_input(input);
-
-    total_error = sumsqdiff(value, output);
     std::vector<double> value = this->get_output(input);
+    total_error += sumsqdiff(value, output);
   }
 
   this->last_error = total_error;
