@@ -13,6 +13,7 @@ OBJ = \
 			obj/activation_functions/lrelu.o \
 			obj/util.o
 	obj/nn_dot.o \
+	obj/nn_print.o \
 
 LINK = 
 EXE = sinn
