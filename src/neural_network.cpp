@@ -1,6 +1,5 @@
 #include <iostream>
 #include <sstream>
-#include <iomanip>
 #include <fstream>
 
 #include "hidden_neuron.hpp"
