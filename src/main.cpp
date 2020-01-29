@@ -6,8 +6,8 @@
 int main(void)
 {
   NeuralNetwork nn = NeuralNetwork();
-  nn.add_layer(new InputLayer(5));
-  nn.add_layer(new OutputLayer(1));
+  nn.add_layer(new InputLayer(5), 1.0);
+  nn.add_layer(new OutputLayer(1), 1.0);
 
   std::vector<std::vector<double>> training_inputs = {
     {1, 2, 3, 4},

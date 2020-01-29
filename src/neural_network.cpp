@@ -14,7 +14,7 @@ NeuralNetwork::NeuralNetwork()
 }
 
 
-void NeuralNetwork::add_layer(Layer *layer)
+void NeuralNetwork::add_layer(Layer *layer, double weight)
 {
   this->layers.push_back(layer);
 
@@ -23,7 +23,7 @@ void NeuralNetwork::add_layer(Layer *layer)
     for (auto previous : this->layers[nlayers-2]->neurons) {
       for (auto latest : this->layers[nlayers-1]->neurons) {
         
-        ((HiddenNeuron *)latest)->add_weighted_input(previous, 0.1);
+        ((HiddenNeuron *)latest)->add_weighted_input(previous, weight);
       }
     }
   }

@@ -14,7 +14,7 @@ class NeuralNetwork {
 
     NeuralNetwork();
 
-    void add_layer(Layer *layer);
+    void add_layer(Layer *layer, double weight);
     void print();
     std::vector<double> run(std::vector<double> input);
     void train(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs, double learning_rate, double dWeight=1e-5);
