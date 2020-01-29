@@ -60,8 +60,8 @@ double NeuralNetwork::get_error(std::vector<std::vector<double>> training_inputs
     auto output = training_outputs[set_index];
     this->set_input(input);
 
-    std::vector<double> value = ((OutputLayer *)this->layers[this->layers.size()-1])->get_output();
     total_error = sumsqdiff(value, output);
+    std::vector<double> value = this->get_output(input);
   }
 
   this->last_error = total_error;
