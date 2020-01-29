@@ -1,5 +1,5 @@
 CXX = g++
-CFLAGS = -g -Wall -Wextra -std=c++17 -O0
+CFLAGS = -g -Wall -Wextra -Werror -std=c++17 -O0
 OBJ = \
 	obj/neural_network.o \
 	obj/nn_dot.o \

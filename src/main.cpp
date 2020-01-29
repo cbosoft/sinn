@@ -27,7 +27,7 @@ int main(void)
   exit(0);
 
   double learning_rate = 0.1;
-  double tolerance = 5e-2;
+  //double tolerance = 5e-2;
   int epochs = 30;
 
   for (int i = 0; i < epochs /*&& nn.get_last_error() > tolerance*/; i++) {
