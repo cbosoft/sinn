@@ -12,6 +12,7 @@ OBJ = \
 			obj/activation_functions/identity.o \
 			obj/activation_functions/lrelu.o \
 			obj/util.o
+	obj/nn_dot.o \
 
 LINK = 
 EXE = sinn
