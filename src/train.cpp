@@ -44,7 +44,7 @@ void NeuralNetwork::train(std::vector<std::vector<double>> training_inputs, std:
 
   }
 
-  std::cerr << this->last_error << std::endl;
+  //std::cerr << this->last_error << std::endl;
 }
 
 double NeuralNetwork::get_error(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs)
