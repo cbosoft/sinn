@@ -30,8 +30,7 @@ void NeuralNetwork::add_layer(Layer *layer)
 } 
 
 
-
-double NeuralNetwork::get_last_error()
+double NeuralNetwork::get_last_error() const
 {
   return this->last_error;
 }

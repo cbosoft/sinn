@@ -22,5 +22,8 @@ class NeuralNetwork {
     void set_input(std::vector<double> input);
     void as_dot(std::string filename);
     double get_last_error();
+    std::vector<double> get_output() const;
+    void as_dot(std::string filename) const;
+    double get_last_error() const;
 
 };
