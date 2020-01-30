@@ -2,12 +2,16 @@
 
 #include <vector>
 
-class Neuron {
+namespace sinn {
 
-  public:
+  class Neuron {
+  
+    public:
+  
+      Neuron() =default;
+      virtual ~Neuron() =default;
+  
+      virtual double get_value() =0;
+  };
 
-    Neuron() =default;
-    virtual ~Neuron() =default;
-
-    virtual double get_value() =0;
-};
+} // namespace sinn

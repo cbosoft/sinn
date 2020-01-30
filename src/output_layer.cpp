@@ -1,11 +1,15 @@
 #include "output_layer.hpp"
 
-std::vector<double> OutputLayer::get_output()
-{
-  std::vector<double> rv;
+namespace sinn {
 
-  for (auto n : this->neurons)
-    rv.push_back(n->get_value());
+  std::vector<double> OutputLayer::get_output()
+  {
+    std::vector<double> rv;
+  
+    for (auto n : this->neurons)
+      rv.push_back(n->get_value());
+  
+    return rv;
+  }
 
-  return rv;
-}
+} //namespace sinn

@@ -3,14 +3,18 @@
 #include "hidden_neuron.hpp"
 #include "layer.hpp"
 
-class HiddenLayer : public Layer {
+namespace sinn {
 
-  public:
+  class HiddenLayer : public Layer {
+  
+    public:
+  
+      HiddenLayer(int n);
+      ~HiddenLayer() =default;
+  
+  
+      void generate_neurons(int n);
+  
+  };
 
-    HiddenLayer(int n);
-    ~HiddenLayer() =default;
-
-
-    void generate_neurons(int n);
-
-};
+} // namespace sinn
