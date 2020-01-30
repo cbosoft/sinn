@@ -15,35 +15,36 @@ OBJ = \
 	obj/activation_functions/lrelu.o \
 	obj/util.o
 
+TESTS = \
+				tests/linear_regression1 \
+				tests/next_in_series1
+
 LINK = 
 SO = libsinn.so
+.SECONDARY:
 
-obj/test%.o: src/test%.cpp $(HDR)
+obj/test/%.o: src/test/%.cpp $(HDR)
+	@echo -e "\u001b[36mASSEMBLING OBJECT $@\u001b[0m"
 	mkdir -p `dirname $@`
 	$(CXX) $(CFLAGS) $< -c -o $@
 
 obj/%.o: src/%.cpp $(HDR)
+	@echo -e "\u001b[33mASSEMBLING PIC OBJECT $@\u001b[0m"
 	mkdir -p `dirname $@`
 	$(CXX) $(CFLAGS) $< -c -fPIC -o $@
 
-.PHONY: shared
-
-shared: $(SO)
-
 %.so: $(OBJ) $(HDR)
-	$(CXX) $(CFLAGS) -shared $(OBJ) -o $(SO)
+	@echo -e "\u001b[34mLINKING OBJECTS TO EXECUTABLE $@\u001b[0m"
+	$(CXX) $(CFLAGS) -shared $(OBJ) -o $@
 
 .PHONY: tests
-
-tests: shared test1 test2
+tests: $(TESTS)
 	cd tests && ./run_tests.sh
 
-test1: obj/test1.o $(OBJ) $(HDR)
-	$(CXX) $(CFLAGS) -L`pwd` $< $(OBJ) -o tests/$@ -lsinn $(LINK)
-
-test2: obj/test2.o $(OBJ) $(HDR)
-	$(CXX) $(CFLAGS) -L`pwd` $< $(OBJ) -o tests/$@ -lsinn $(LINK)
-
+tests/%: obj/tests/%.o $(SO)
+	@echo -e "\u001b[32mLINKING OBJECTS TO TEST EXECUTABLE $@\u001b[0m"
+	echo $(CXX) $(CFLAGS) -L`pwd` $< -o $@ -lsinn $(LINK)
+	$(CXX) $(CFLAGS) -L`pwd` $< -o $@ -lsinn $(LINK)
 
 clean:
-	rm -rf obj $(EXE)
+	rm -rf obj $(SO) $(TESTS)
