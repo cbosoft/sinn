@@ -43,7 +43,7 @@ int main(void)
 
 
   double learning_rate = 0.1;
-  double tolerance = 5e-2;
+  double tolerance = 0.5;
   int epochs = 10000;
 
   for (int i = 0; i < epochs && nn.get_last_error() > tolerance; i++) {
@@ -56,13 +56,15 @@ int main(void)
   // for (size_t i = 0; i < training_inputs.size(); i++) {
   //   auto input = training_inputs[i];
   //   std::vector<double> output = nn(input);
-  //   std::cout << vec2string(input) << " -> " << vec2string(output) << " (" << vec2string(training_outputs[i]) << ")" << std::endl;
+  //   std::cout << sinn::util::vec2string(input) << " -> " << sinn::util::vec2string(output) << " (" << sinn::util::vec2string(training_outputs[i]) << ")" << std::endl;
   // }
   // for (size_t i = 0; i < checking_inputs.size(); i++) {
   //   auto input = checking_inputs[i];
   //   std::vector<double> output = nn(input);
-  //   std::cout << vec2string(input) << " -> " << vec2string(output) << " (" << vec2string(checking_outputs[i]) << ")" << std::endl;
+  //   std::cout << sinn::util::vec2string(input) << " -> " << sinn::util::vec2string(output) << " (" << sinn::util::vec2string(checking_outputs[i]) << ")" << std::endl;
   // }
+  // std::cout << nn.get_error(checking_inputs, checking_outputs) << std::endl;
+  // std::cout << nn.get_last_error() << std::endl;
 
-  test_check_and_exit(nn.get_last_error() < tolerance);
+  test_check_and_exit(nn.get_error(checking_inputs, checking_outputs) < tolerance);
 }
