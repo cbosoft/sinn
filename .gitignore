@@ -1,5 +1,5 @@
 obj
-sinn
+*.so
 vgcore*
 *.gv
 *.png
