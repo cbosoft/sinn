@@ -16,26 +16,33 @@ OBJ = \
 	obj/util.o
 
 LINK = 
-EXE = sinn
+SO = libsinn.so
 
-obj/%.o: src/%.cpp $(HDR)
+obj/test%.o: src/test%.cpp $(HDR)
 	mkdir -p `dirname $@`
 	$(CXX) $(CFLAGS) $< -c -o $@
 
-exe: obj/main.o $(OBJ) $(HDR)
-	$(CXX) $(CFLAGS) obj/main.o $(OBJ) -o $(EXE) $(LINK)
+obj/%.o: src/%.cpp $(HDR)
+	mkdir -p `dirname $@`
+	$(CXX) $(CFLAGS) $< -c -fPIC -o $@
 
-build-and-run: exe
-	./$(EXE)
+.PHONY: shared
 
-tests: test1 test2
+shared: $(SO)
+
+%.so: $(OBJ) $(HDR)
+	$(CXX) $(CFLAGS) -shared $(OBJ) -o $(SO)
+
+.PHONY: tests
+
+tests: shared test1 test2
 	cd tests && ./run_tests.sh
 
 test1: obj/test1.o $(OBJ) $(HDR)
-	$(CXX) $(CFLAGS) $< $(OBJ) -o tests/$@ $(LINK)
+	$(CXX) $(CFLAGS) -L`pwd` $< $(OBJ) -o tests/$@ -lsinn $(LINK)
 
 test2: obj/test2.o $(OBJ) $(HDR)
-	$(CXX) $(CFLAGS) $< $(OBJ) -o tests/$@ $(LINK)
+	$(CXX) $(CFLAGS) -L`pwd` $< $(OBJ) -o tests/$@ -lsinn $(LINK)
 
 
 clean:
