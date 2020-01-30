@@ -7,32 +7,39 @@
 namespace sinn {
 
   class NeuralNetwork {
-  
+
     private:
-  
+
       std::vector<Layer *> layers;
       double last_error;
-  
+
     public:
-  
+
       NeuralNetwork();
-  
-      void add_layer(Layer *layer, double weight);
+
+
+      // nn_print.cpp
       void print();
-      std::vector<double> run(std::vector<double> input);
+
+      // train.cpp
       void train(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs, double learning_rate, double dWeight=1e-5);
       double get_error(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs);
+
+      // nn_dot.cpp
+      void as_dot(std::string filename) const;
+
+      // neural_network.cpp
+      void add_layer(Layer *layer, double weight);
       void set_input(std::vector<double> input);
+      double get_last_error() const;
       std::vector<double> get_output() const;
       std::vector<double> get_output(std::vector<double> input);
-      void as_dot(std::string filename) const;
-      double get_last_error() const;
-  
+
       std::vector<double> operator()(std::vector<double> input)
       {
         return this->get_output(input);
       }
-  
+
   };
 
 } // namespace sinn
