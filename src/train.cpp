@@ -9,13 +9,6 @@ namespace sinn {
 
   void NeuralNetwork::train(std::vector<std::vector<double>> training_inputs, std::vector<std::vector<double>> training_outputs, double learning_rate, double dWeight)
   {
-    /*
-      For each neuron:
-        calculate gradient and shift weight
-  
-      "calculate gradient"... wrt the whole error? Or just for one input? Its gotta be the whole thing, right?
-     */
-  
     double initial_error = this->get_error(training_inputs, training_outputs);
     for (size_t layer_index = 1; layer_index < this->layers.size(); layer_index++) {
       auto layer = this->layers[layer_index];
@@ -71,5 +64,6 @@ namespace sinn {
     this->last_error = total_error;
     return total_error;
   }
+
 
 } // namespace sinn
