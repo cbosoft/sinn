@@ -2,6 +2,7 @@
 #include <sstream>
 #include <fstream>
 
+#include "util.hpp"
 #include "hidden_neuron.hpp"
 #include "neural_network.hpp"
 #include "input_neuron.hpp"
@@ -12,23 +13,37 @@ namespace sinn {
   {
     this->last_error = 100.0;
   }
-  
-  void NeuralNetwork::add_layer(Layer *layer, double weight)
+
+  void NeuralNetwork::add_layer_weighted(Layer *layer, double weight)
   {
     this->layers.push_back(layer);
-  
+
     size_t nlayers = this->layers.size();
     if (nlayers > 1) {
       for (auto previous : this->layers[nlayers-2]->neurons) {
         for (auto latest : this->layers[nlayers-1]->neurons) {
-          
+
           ((HiddenNeuron *)latest)->add_weighted_input(previous, weight);
         }
       }
     }
   } 
-  
-  
+
+  void NeuralNetwork::add_layer_normal(Layer *layer, double mean, double stddev)
+  {
+    this->layers.push_back(layer);
+
+    size_t nlayers = this->layers.size();
+    if (nlayers > 1) {
+      for (auto previous : this->layers[nlayers-2]->neurons) {
+        for (auto latest : this->layers[nlayers-1]->neurons) {
+
+          ((HiddenNeuron *)latest)->add_weighted_input(previous, util::get_normal_random(mean, stddev));
+        }
+      }
+    }
+  } 
+
   double NeuralNetwork::get_last_error() const
   {
     return this->last_error;
