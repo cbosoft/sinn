@@ -34,12 +34,23 @@ inline void test_check_and_exit(bool condition)
 
 typedef double (* TrainingFunction)(int );
 
-inline void get_training_set_from_function(TrainingFunction *f, int n, std::vector<double> &inputs, std::vector<double> &outputs)
+inline void get_training_set_from_function_uniform(TrainingFunction *f, int n, std::vector<double> &inputs, std::vector<double> &outputs, double min, double max)
 {
   inputs.erase(inputs.begin(), inputs.end());
   outputs.erase(outputs.begin(), outputs.end());
   for (int i = 0; i < n; i++) {
-    double v = sinn::util::get_normal_random();
+    double v = sinn::util::get_uniform_random(min, max);
+    inputs.push_back(v);
+    outputs.push_back((*f)(v));
+  }
+}
+
+inline void get_training_set_from_function_normal(TrainingFunction *f, int n, std::vector<double> &inputs, std::vector<double> &outputs, double mean, double stddev)
+{
+  inputs.erase(inputs.begin(), inputs.end());
+  outputs.erase(outputs.begin(), outputs.end());
+  for (int i = 0; i < n; i++) {
+    double v = sinn::util::get_normal_random(mean, stddev);
     inputs.push_back(v);
     outputs.push_back((*f)(v));
   }
