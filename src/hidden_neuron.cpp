@@ -34,27 +34,39 @@ namespace sinn {
   }
   
   
-  void HiddenNeuron::swap_weights()
+  void HiddenNeuron::swap_weights_and_bias()
   {
     auto temp = this->weights;
     this->weights = this->substitute_weights;
     this->substitute_weights = this->weights;
+    double temp_bias = this->bias;
+    this->bias = this->substitute_bias;
+    this->substitute_bias = temp_bias;
   }
   
   
-  double HiddenNeuron::get_substitute(int index)
+  double HiddenNeuron::get_substitute_weight(int index)
   {
     return this->substitute_weights[index];
   }
-  
+
+  double HiddenNeuron::get_substitute_bias()
+  {
+    return this->substitute_bias;
+  }
   
   double HiddenNeuron::get_weight(int index)
   {
     return this->weights[index];
   }
+
+  double HiddenNeuron::get_bias()
+  {
+    return this->bias;
+  }
   
   
-  void HiddenNeuron::set_substitute(int index, double value)
+  void HiddenNeuron::set_substitute_weight(int index, double value)
   {
     this->substitute_weights[index] = value;
   }
@@ -64,5 +76,17 @@ namespace sinn {
   {
     this->weights[index] = value;
   }
+
+  void HiddenNeuron::set_bias(double value)
+  {
+    this->bias = value;
+  }
+
+  void HiddenNeuron::set_substitute_bias(double value)
+  {
+    this->substitute_bias = value;
+  }
+
+
 
 } // namespace sinn
