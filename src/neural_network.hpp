@@ -29,6 +29,9 @@ namespace sinn {
       void as_dot(std::string filename) const;
 
       // neural_network.cpp
+      void link_layers_weighted(int, int, double);
+      void link_layers_normal(int, int, double, double);
+      void link_layers_uniform(int, int, double, double);
 
       void add_layer_weighted(Layer *layer, double weight);
       void add_layer_normal(Layer *layer, double, double);

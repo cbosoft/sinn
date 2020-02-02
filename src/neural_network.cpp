@@ -3,6 +3,7 @@
 #include <fstream>
 
 #include "util.hpp"
+#include "exception.hpp"
 #include "hidden_neuron.hpp"
 #include "neural_network.hpp"
 #include "input_neuron.hpp"
@@ -44,28 +45,103 @@ namespace sinn {
     }
   } 
 
+  void NeuralNetwork::link_layers_weighted(int from, int to, double weight)
+  {
+    if (to > from) {
+      throw Exception("LayerError", "Network layers can only be linked from ahead to behind ($to must be less than $from).");
+    }
+
+    int max_index = this->layers.size() - 1;
+    if (from > max_index || to > max_index || from < 0 || to < 0) {
+      throw Exception("LayerError", "Network layer indices given are not within acceptable range (0 - layer size).");
+    }
+
+    // Not sure if this is actually an error?
+    // if (from == to) {
+    //   throw Exception("LayerError", "Layer cannot be linked to itself.");
+    // }
+
+    for (auto neuron_from : this->layers[from]->neurons) {
+      for (auto neuron_to : this->layers[to]->neurons) {
+        ((HiddenNeuron *)neuron_to)->add_weighted_input(neuron_from, weight);
+      }
+    }
+
+  }
+
+
+  void NeuralNetwork::link_layers_normal(int from, int to, double mean, double stddev)
+  {
+    if (to > from) {
+      throw Exception("LayerError", "Network layers can only be linked from ahead to behind ($to must be less than $from).");
+    }
+
+    int max_index = this->layers.size() - 1;
+    if (from > max_index || to > max_index || from < 0 || to < 0) {
+      throw Exception("LayerError", "Network layer indices given are not within acceptable range (0 - layer size).");
+    }
+
+    // Not sure if this is actually an error?
+    // if (from == to) {
+    //   throw Exception("LayerError", "Layer cannot be linked to itself.");
+    // }
+
+    for (auto neuron_from : this->layers[from]->neurons) {
+      for (auto neuron_to : this->layers[to]->neurons) {
+        ((HiddenNeuron *)neuron_to)->add_weighted_input(neuron_from, util::get_normal_random(mean, stddev));
+      }
+    }
+
+  }
+
+
+  void NeuralNetwork::link_layers_uniform(int from, int to, double min, double max)
+  {
+    if (to > from) {
+      throw Exception("LayerError", "Network layers can only be linked from ahead to behind ($to must be less than $from).");
+    }
+
+    int max_index = this->layers.size() - 1;
+    if (from > max_index || to > max_index || from < 0 || to < 0) {
+      throw Exception("LayerError", "Network layer indices given are not within acceptable range (0 - layer size).");
+    }
+
+    // Not sure if this is actually an error?
+    // if (from == to) {
+    //   throw Exception("LayerError", "Layer cannot be linked to itself.");
+    // }
+
+    for (auto neuron_from : this->layers[from]->neurons) {
+      for (auto neuron_to : this->layers[to]->neurons) {
+        ((HiddenNeuron *)neuron_to)->add_weighted_input(neuron_from, util::get_uniform_random(min, max));
+      }
+    }
+
+  }
+
+
   double NeuralNetwork::get_last_error() const
   {
     return this->last_error;
   }
-  
-  
-  
+
+
+
   void NeuralNetwork::set_input(std::vector<double> input)
   {
     for (size_t i = 0; i < input.size(); i++) {
       ((InputNeuron *)this->layers[0]->neurons[i])->set_value(input[i]);
     }
   }
-  
-  
+
+
   std::vector<double> NeuralNetwork::get_output() const
   {
     std::vector<double> value = ((OutputLayer *)this->layers[this->layers.size()-1])->get_output();
     return value;
   }
-  
-  
+
+
   std::vector<double> NeuralNetwork::get_output(std::vector<double> input)
   {
      this->set_input(input);
