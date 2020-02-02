@@ -6,8 +6,6 @@
 
 static std::random_device rd;
 static std::mt19937 mt_gen(rd());
-static std::uniform_real_distribution<> uniform_distribution(0.0, 1.0);
-static std::normal_distribution<> normal_distribution{1.0,1.0};
 
 namespace sinn {
 
@@ -40,13 +38,15 @@ namespace sinn {
       return rv;
     }
 
-    double get_uniform_random()
+    double get_uniform_random(double min, double max)
     {
+      std::uniform_real_distribution<> uniform_distribution(min, max);
       return uniform_distribution(mt_gen);
     }
 
-    double get_normal_random()
+    double get_normal_random(double mean, double stddev)
     {
+      std::normal_distribution<> normal_distribution{mean,stddev};
       return normal_distribution(mt_gen);
     }
 
