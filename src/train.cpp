@@ -26,8 +26,18 @@ namespace sinn {
           double gradient = (dError == 0) ? 0 : dWeight/dError;
           //double gradient = dWeight/dError;
           //std::cout << dError << "  " << gradient  << std::endl;
-          neuron->set_substitute_weight(weight_index, neuron->weights[weight_index] - (learning_rate * (gradient)));
+          neuron->set_substitute_weight(weight_index, weight_before - (learning_rate * gradient));
 
+        }
+
+        {
+          double bias_before = neuron->get_bias();
+          neuron->set_bias(bias_before + dWeight);
+          double dError = this->get_error(training_inputs, training_outputs) - initial_error;
+          neuron->set_bias(bias_before);
+
+          double gradient = (dError == 0.0) ? 0.0 : dWeight/dError;
+          neuron->set_substitute_bias(bias_before - (learning_rate * gradient));
         }
 
       }
