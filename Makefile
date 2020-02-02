@@ -39,7 +39,7 @@ obj/%.o: src/%.cpp $(HDR)
 
 .PHONY: tests
 tests: $(TESTS)
-	cd tests && ./run_tests.sh
+	./run_tests.sh
 
 tests/%: obj/tests/%.o $(SO)
 	@echo -e "\u001b[32mLINKING OBJECTS TO TEST EXECUTABLE $@\u001b[0m"
